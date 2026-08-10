@@ -380,15 +380,34 @@ with tab1:
     st.write("Upload an image of Bahraini currency and let the Deep Learning "
              "model identify the currency.")
 
-    with st.form("currency_form"):
-        uploaded_file = st.file_uploader("Choose a currency image", type=["jpg", "jpeg", "png"])
-        predict_button = st.form_submit_button("🔍 Predict Currency")
+    input_method = st.radio(
+        "Choose input method",
+        ["📁 Upload Image", "📷 Take Photo"],
+        horizontal=True
+    )
+
+    uploaded_file = None
+    camera_photo = None
+
+    if input_method == "📁 Upload Image":
+        uploaded_file = st.file_uploader(
+            "Choose a currency image",
+            type=["jpg", "jpeg", "png"]
+        )
+    else:
+        camera_photo = st.camera_input(
+            "Take a photo of the Bahraini currency"
+        )
+
+    predict_button = st.button("🔍 Predict Currency")
 
     if predict_button:
-        if uploaded_file is None:
-            st.warning("Please upload an image first.")
+        image_source = uploaded_file if uploaded_file is not None else camera_photo
+
+        if image_source is None:
+            st.warning("Please upload an image or take a photo first.")
         else:
-            image = Image.open(uploaded_file).convert("RGB")
+            image = Image.open(image_source).convert("RGB")
             resized_image = image.resize((224, 224))
             image_array = np.array(resized_image) / 255.0
             image_array = np.expand_dims(image_array,axis=0)
@@ -498,7 +517,7 @@ with tab3:
             <h3>Step 1</h3>
     
             <p>
-            Upload a clear image of a Bahraini currency note or coin.
+            Upload a clear image or take a photo of a Bahraini currency note or coin.
             </p>
     
             </div>
