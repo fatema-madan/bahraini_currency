@@ -91,7 +91,7 @@ st.markdown("""
     }
 
     .stTabs [data-baseweb="tab"] p {
-        color: inherit !important;
+        color: #176b3a !important;
     }
 
     .stTabs [aria-selected="true"] {
