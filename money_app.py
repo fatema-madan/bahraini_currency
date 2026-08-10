@@ -333,21 +333,21 @@ st.markdown("""
 
 
 # Class Names
-class_names = ["5 fils",
-                "25 fils",
-                "50 fils",
-                "100 fils",
-                "BD 0.5",
-                "BD 1",
-                "BD 5",
-                "BD 10",
-                "BD 20"]
+class_names = ["0.05",
+                "0.100",
+                "0.25",
+                "0.5 BD",
+                "0.50",
+                "10 BD",
+                "1BD",
+                "20 BD",
+                "5 BD"]
 
 
 # Load Model Once
 @st.cache_resource
 def load_currency_model():
-    return load_model("currency_model3.keras")
+    return load_model("currency_model.keras")
 
 
 model = load_currency_model()
@@ -466,7 +466,7 @@ with tab2:
     
             <p>1. Upload a currency image</p>
     
-            <p>2. Resize the image to 64 × 64</p>
+            <p>2. Resize the image to 224 × 224</p>
     
             <p>3. Normalize pixel values</p>
     
